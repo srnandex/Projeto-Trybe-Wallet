@@ -14,6 +14,7 @@ class Wallet extends React.Component {
   async componentDidMount() {
     const { getCoin } = this.props;
     const siglas = await getCoin();
+    console.log(siglas);
   }
 
   render() {
@@ -32,6 +33,7 @@ class Wallet extends React.Component {
 
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
+  getCoin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ user }) => ({
