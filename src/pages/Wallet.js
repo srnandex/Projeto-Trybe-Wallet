@@ -11,21 +11,52 @@ class Wallet extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { getCoin } = this.props;
-    const siglas = await getCoin();
-    console.log(siglas);
+    getCoin();
   }
 
   render() {
     const { valorTotal } = this.state;
-    const { email } = this.props;
+    const { email, sig } = this.props;
     return (
       <div>
-        <h1>Wallet</h1>
-        <span data-testid="email-field">{ email }</span>
-        <span data-testid="header-currency-field">BRL</span>
-        <span data-testid="total-field">{ valorTotal }</span>
+        <header>
+          <h1>Wallet</h1>
+          <span data-testid="email-field">{ email }</span>
+          <span data-testid="header-currency-field">BRL</span>
+          <span data-testid="total-field">{ valorTotal }</span>
+        </header>
+        <form>
+          <input data-testid="value-input" type="value" />
+          <input data-testid="description-input" type="text" />
+          <label data-testid="currency-input" htmlFor="siglas">
+            Moeda
+            <select name="siglas" id="siglas">
+              {sig.map((si) => (
+                <option key={ si } value={ si }>{ si }</option>
+              ))}
+            </select>
+          </label>
+          <label data-testid="method-input" htmlFor="method">
+            Metodo:
+            <select name="method" id="method">
+              <option value="dinheiro">Dinheiro</option>
+              <option value="cartao-credito">Cartão de crédito</option>
+              <option value="cartao-debito">Cartão de débito</option>
+            </select>
+          </label>
+          <label data-testid="tag-input" htmlFor="categories">
+            Categoria:
+            <select name="categories" id="categories">
+              <option value="alimentação">Alimentação</option>
+              <option value="lazer">Lazer</option>
+              <option value="trabalho">Trabalho</option>
+              <option value="transporte">Transporte</option>
+              <option value="saude">Saúde</option>
+            </select>
+          </label>
+        </form>
       </div>
     );
   }
@@ -33,11 +64,13 @@ class Wallet extends React.Component {
 
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
+  sig: PropTypes.arrayOf(PropTypes.string).isRequired,
   getCoin: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ user }) => ({
+const mapStateToProps = ({ user, wallet }) => ({
   email: user.email,
+  sig: wallet.currencies,
 });
 
 const mapDispatchToProps = (dispatch) => ({
