@@ -22,8 +22,7 @@ class Wallet extends React.Component {
   updateInicialValue = (value) => {
     const { valorTotal } = this.state;
     const sumValue = valorTotal + value;
-    const upValue = Number(sumValue.toFixed(2));
-    this.setState({ valorTotal: upValue });
+    this.setState({ valorTotal: sumValue });
   };
 
   render() {

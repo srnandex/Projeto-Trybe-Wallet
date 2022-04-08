@@ -32,14 +32,21 @@ class WalletTable extends React.Component {
                 <td>{ expen.description }</td>
                 <td>{ expen.tag }</td>
                 <td>{ expen.method }</td>
-                <td>{ fixValue}</td>
+                <td>{ fixValue }</td>
                 <td>{ name }</td>
                 <td>{ fixAsk }</td>
                 <td>{ fixConver }</td>
                 <td>Real</td>
                 <td>
                   <button data-testid="edit-btn" type="button">Editar</button>
-                  <button data-testid="delete-btn" type="button">Excluir</button>
+                  <button
+                    onClick={ this.deletExpense }
+                    data-testid="delete-btn"
+                    type="button"
+                  >
+                    Excluir
+
+                  </button>
                 </td>
               </tr>
             );

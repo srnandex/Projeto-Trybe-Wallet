@@ -39,6 +39,7 @@ resetState = () => {
     const exchangeRates = await api();
     const { ask } = exchangeRates[currency];
     const conversao = Number(value) * Number(ask);
+    // const fixConver = conversao.toFixed(2);
     updateInicialValue(conversao);
     this.setState({ exchangeRates }, () => saveEx(this.state));
     this.resetState();
@@ -68,9 +69,10 @@ resetState = () => {
           data-testid="description-input"
           type="text"
         />
-        <label data-testid="currency-input" htmlFor="currency">
+        <label htmlFor="currency">
           Moeda
           <select
+            data-testid="currency-input"
             onChange={ this.handleChange }
             value={ currency }
             name="currency"
@@ -81,27 +83,34 @@ resetState = () => {
             ))}
           </select>
         </label>
-        <label data-testid="method-input" htmlFor="method">
+        <label htmlFor="method">
           Metodo:
           <select
             value={ method }
+            data-testid="method-input"
             onChange={ this.handleChange }
             name="method"
             id="method"
           >
-            <option value="dinheiro">Dinheiro</option>
-            <option value="cartao-credito">Cartão de crédito</option>
-            <option value="cartao-debito">Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
-        <label data-testid="tag-input" htmlFor="tag">
+        <label htmlFor="tag">
           Categoria:
-          <select value={ tag } onChange={ this.handleChange } name="tag" id="tag">
-            <option value="alimentação">Alimentação</option>
-            <option value="lazer">Lazer</option>
-            <option value="trabalho">Trabalho</option>
-            <option value="transporte">Transporte</option>
-            <option value="saude">Saúde</option>
+          <select
+            data-testid="tag-input"
+            value={ tag }
+            onChange={ this.handleChange }
+            name="tag"
+            id="tag"
+          >
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
         <button onClick={ this.saveExpense } type="button">Adicionar despesa</button>
